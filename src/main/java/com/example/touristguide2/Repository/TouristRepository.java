@@ -17,10 +17,7 @@ public class TouristRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // ------------------------
     // CRUD for attraction
-    // ------------------------
-
     public List<TouristAttraction> getAllAttractions() {
         String sql = "SELECT id, name, description, location FROM attraction";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
@@ -97,10 +94,7 @@ public class TouristRepository {
         }
     }
 
-    // ------------------------
     // Tags
-    // ------------------------
-
     public List<String> getTagsForAttraction(int attractionId) {
         String sql = "SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?";
         return jdbcTemplate.query(sql, new Object[]{attractionId}, (rs, rowNum) -> rs.getString("name"));
@@ -135,13 +129,10 @@ public class TouristRepository {
         }
     }
 
-    // ------------------------
-    // Location
-    // ------------------------
 
+    // Location
     public List<String> getAllLocation() {
         return jdbcTemplate.query("SELECT DISTINCT location FROM attraction ORDER BY location",
                 (rs, rowNum) -> rs.getString("location"));
     }
 }
-//h
