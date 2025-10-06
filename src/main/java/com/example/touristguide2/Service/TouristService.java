@@ -57,8 +57,8 @@ public class TouristService {
         return touristRepository.getAllLocation();
     }
 
-    public List<String> getTagsForAttraction(int attractionId){
-        return touristRepository.getTagsForAttraction(attractionId);
-    }
+//    public List<String> getTagsForAttraction(int attractionId){
+//        return touristRepository.getTagsForAttraction(attractionId);
+//    }
 }
 

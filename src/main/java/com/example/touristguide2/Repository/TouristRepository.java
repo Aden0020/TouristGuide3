@@ -23,10 +23,11 @@ public class TouristRepository {
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             int id = rs.getInt("id");
             return new TouristAttraction(
+                    rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("location"),
-                    getTagsForAttraction(id)
+                    getTouristAttractionTags(id)
             );
         });
 
@@ -65,10 +66,11 @@ public class TouristRepository {
         List<TouristAttraction> list = jdbcTemplate.query(sql, (rs, rowNum) -> {
             int id = rs.getInt("id");
             return new TouristAttraction(
+                    rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("description"),
                     rs.getString("location"),
-                    getTagsForAttraction(id)
+                    getTouristAttractionTags(id)
             );
         }, name);
         return list.isEmpty() ? null : list.get(0);
@@ -95,10 +97,10 @@ public class TouristRepository {
     }
 
     // Tags
-    public List<String> getTagsForAttraction(int attractionId) {
-        String sql = "SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?";
-        return jdbcTemplate.query(sql, new Object[]{attractionId}, (rs, rowNum) -> rs.getString("name"));
-        }
+//    public List<String> getTagsForAttraction(int attractionId) {
+//        String sql = "SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?";
+//        return jdbcTemplate.query(sql, new Object[]{attractionId}, (rs, rowNum) -> rs.getString("name"));
+//        }
 
     public List<String> getTouristAttractionTags(int attractionId) {
         String sql = """

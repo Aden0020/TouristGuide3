@@ -11,13 +11,14 @@ public class TouristAttraction {
     private List<String> tags;
 
     // Constructor
-    public TouristAttraction(String Id, String name, String description, String location, List<String> tags) {
+    public TouristAttraction(Integer Id, String name, String description, String location, List<String> tags) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
         this.tags = tags;
     }
+
 
     // Getters og setters
     public Integer getId(){
