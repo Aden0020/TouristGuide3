@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class touristGuide2 {
+public class TourisGuide3ApplicationTest {
 
     @Test
     void contextLoads() {
     }
-
 }
