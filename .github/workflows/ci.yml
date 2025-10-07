@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [17, 21]  # test med Java 17 og 21
-
+        java: [21]
+        distribution: [temurin]
     steps:
       # 1. Tjekk koden ud
       - name: Checkout
