@@ -28,7 +28,7 @@
         <td><a th:href="@{'/attractions/' + ${attraction.name} + '/tags'}">View Tags</a></td>
         <td><a th:href="@{'/attractions/' + ${attraction.name} + '/edit'}">Update</a></td>
         <td><form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post"
-        onsubmit="return confirm('Vil du fjerne denne turistattraktion fra listen?');">
+                  onsubmit="return confirm('Vil du fjerne denne turistattraktion fra listen?');">
             <button type="submit">Delete</button>
         </form></td>
     </tr>

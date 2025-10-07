@@ -1,9 +1,3 @@
-DROP USER IF EXISTS 'Junes2003'@'localhost';
-CREATE USER 'Junes2003'@'localhost' IDENTIFIED BY 'Hma86kyk....';
-GRANT ALL PRIVILEGES ON touristguide3.* TO 'Junes2003'@'localhost';
-FLUSH PRIVILEGES;
-
-
 -- 2. Opret database
 DROP DATABASE IF EXISTS touristguide3;
 CREATE DATABASE touristguide3;
