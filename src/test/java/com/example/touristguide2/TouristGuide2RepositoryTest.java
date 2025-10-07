@@ -3,10 +3,10 @@ package com.example.touristguide2;
 import com.example.touristguide2.Model.TouristAttraction;
 import com.example.touristguide2.Repository.TouristRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -25,13 +25,12 @@ public class TouristGuide2RepositoryTest {
     @Test
     void addTouristAttraction() {
         repo.addTouristAttraction(new TouristAttraction(
-                null, "TestName", "TestDescription", "Aalborg", null
+                null, "Lollands Bank Park", "Fodboldstadion for NFC", "Nykøbing Falster", null
         ));
 
-        TouristAttraction found = repo.findTouristAttractionByName("TestName");
+        TouristAttraction found = repo.findTouristAttractionByName("Lollands Bank Park");
         assertThat(found).isNotNull();
-        assertThat(found.getDescription()).isEqualTo("TestDescription");
-        assertThat(found.getLocation()).isEqualTo("Aalborg");
+        assertThat(found.getLocation()).isEqualTo("Nykøbing Falster");
     }
 
     // Read
@@ -39,27 +38,27 @@ public class TouristGuide2RepositoryTest {
     void getTouristAttractions() {
         List<TouristAttraction> all = repo.getAllAttractions();
         assertThat(all).isNotNull();
-        assertThat(all.size()).isGreaterThanOrEqualTo(0);
+        assertThat(all.size()).isGreaterThanOrEqualTo(1);
     }
 
     // Update
     @Test
     void updateAttraction() {
         repo.addTouristAttraction(new TouristAttraction(
-                null, "UpdateTest", "OldDescription", "Esbjerg", null
+                null, "UpdateTest", "Gammel beskrivelse", "Aarhus", null
         ));
 
-        repo.updateAttraction("UpdateTest", "NewDescription");
+        repo.updateAttraction("UpdateTest", "Ny beskrivelse");
         TouristAttraction updated = repo.findTouristAttractionByName("UpdateTest");
         assertThat(updated).isNotNull();
-        assertThat(updated.getDescription()).isEqualTo("NewDescription");
+        assertThat(updated.getDescription()).isEqualTo("Ny beskrivelse");
     }
 
     // Delete
     @Test
     void deleteAttraction() {
         repo.addTouristAttraction(new TouristAttraction(
-                null, "DeleteTest", "SomeDescription", "Helsingør", null
+                null, "DeleteTest", "Skal slettes", "Esbjerg", null
         ));
 
         TouristAttraction beforeDelete = repo.findTouristAttractionByName("DeleteTest");
