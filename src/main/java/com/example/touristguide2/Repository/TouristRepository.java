@@ -104,7 +104,8 @@ public class TouristRepository {
 
     public List<String> getTouristAttractionTags(int attractionId) {
         String sql = """
-            SELECT t.name
+            
+                SELECT t.name
             FROM tag t
             JOIN attraction_tag at ON t.id = at.tag_id
             WHERE at.attraction_id=?
@@ -124,17 +125,21 @@ public class TouristRepository {
             jdbcTemplate.update("INSERT IGNORE INTO tag (name) VALUES (?)", tag);
 
             // link attraction og tag
-            jdbcTemplate.update("""
-                INSERT IGNORE INTO attraction_tag (attraction_id, tag_id)
-                VALUES (?, (SELECT id FROM tag WHERE name=?))
+            jdbcTemplate.update(
+                    """
+                INSERT IGNORE INTO attraction_tag (
+                    attraction_id, tag_id)
+                VALUES (?, (
+                    SELECT id FROM tag WHERE name=?))
                 """, attractionId, tag);
         }
     }
 
 
-    // Location
-    public List<String> getAllLocation() {
-        return jdbcTemplate.query("SELECT DISTINCT location FROM attraction ORDER BY location",
-                (rs, rowNum) -> rs.getString("location"));
+    public List<String> getAllLocations() {
+        return jdbcTemplate.query(
+                "SELECT DISTINCT location FROM attraction ORDER BY location",
+                (rs, rowNum) -> rs.getString("location")
+        );
     }
-}
+    }
