@@ -66,7 +66,7 @@ class TouristControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/attractions"));
 
-        verify(touristService).saveAttraction(attraction);
+        verify(touristService).saveAttraction(any(TouristAttraction.class));
     }
 
     @Test

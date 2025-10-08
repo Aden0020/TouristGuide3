@@ -17,7 +17,7 @@ public class TouristRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // CRUD for attraction
+
     public List<TouristAttraction> getAllAttractions() {
         String sql = "SELECT id, name, description, location FROM attraction";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
@@ -34,15 +34,15 @@ public class TouristRepository {
     }
 
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
-        // indsæt attraction
+
         jdbcTemplate.update("INSERT INTO attraction (name, description, location) VALUES (?, ?, ?)",
                 attraction.getName(), attraction.getDescription(), attraction.getLocation());
 
-        // hent id på attraction
+
         Integer id = jdbcTemplate.queryForObject("SELECT id FROM attraction WHERE name=?",
                 Integer.class, attraction.getName());
 
-        // gem tags
+
         saveTagsForAttraction(id, attraction.getTags());
 
         return attraction;
@@ -53,12 +53,11 @@ public class TouristRepository {
         return findTouristAttractionByName(name);
     }
 
-    public TouristAttraction deleteAttraction(String name) {
+    public void deleteAttraction(String name) {
         TouristAttraction existing = findTouristAttractionByName(name);
         if (existing != null) {
             jdbcTemplate.update("DELETE FROM attraction WHERE name=?", name);
         }
-        return existing;
     }
 
     public TouristAttraction findTouristAttractionByName(String name) {
@@ -83,12 +82,12 @@ public class TouristRepository {
             jdbcTemplate.update("UPDATE attraction SET description=?, location=? WHERE name=?",
                     attraction.getDescription(), attraction.getLocation(), attraction.getName());
 
-            // slet gamle tags
+
             Integer id = jdbcTemplate.queryForObject("SELECT id FROM attraction WHERE name=?",
                     Integer.class, attraction.getName());
             jdbcTemplate.update("DELETE FROM attraction_tag WHERE attraction_id=?", id);
 
-            // gem nye tags
+
             saveTagsForAttraction(id, attraction.getTags());
             return findTouristAttractionByName(attraction.getName());
         } else {
@@ -121,10 +120,10 @@ public class TouristRepository {
     private void saveTagsForAttraction(Integer attractionId, List<String> tags) {
         if (tags == null) return;
         for (String tag : tags) {
-            // indsæt tag hvis den ikke findes
+
             jdbcTemplate.update("INSERT IGNORE INTO tag (name) VALUES (?)", tag);
 
-            // link attraction og tag
+
             jdbcTemplate.update(
                     """
                 INSERT IGNORE INTO attraction_tag (

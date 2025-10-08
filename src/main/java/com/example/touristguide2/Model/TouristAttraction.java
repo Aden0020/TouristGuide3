@@ -11,7 +11,7 @@ public class TouristAttraction {
     private List<String> tags;
 
     // Constructor
-    public TouristAttraction(Integer Id, String name, String description, String location, List<String> tags) {
+    public TouristAttraction(Integer id, String name, String description, String location, List<String> tags) {
         this.id = id;
         this.name = name;
         this.description = description;

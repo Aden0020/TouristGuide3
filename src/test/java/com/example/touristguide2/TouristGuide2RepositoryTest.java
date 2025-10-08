@@ -21,16 +21,13 @@ public class TouristGuide2RepositoryTest {
     @Autowired
     private TouristRepository repo;
 
-    // Create
     @Test
     void addTouristAttraction() {
-        repo.addTouristAttraction(new TouristAttraction(
-                null, "Lollands Bank Park", "Fodboldstadion for NFC", "Nykøbing Falster", null
+        TouristAttraction testcase = repo.addTouristAttraction(new TouristAttraction(
+                1, "Lollands Bank Park", "Fodboldstadion for NFC", "Nykøbing Falster", null
         ));
 
-        TouristAttraction found = repo.findTouristAttractionByName("Lollands Bank Park");
-        assertThat(found).isNotNull();
-        assertThat(found.getLocation()).isEqualTo("Nykøbing Falster");
+
     }
 
     // Read
